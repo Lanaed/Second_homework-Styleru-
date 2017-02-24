@@ -2,6 +2,7 @@ import json
 import counting
 from shape_base import shape_filtred_base
 from shape_base import shape_main_base
+from graph import plt_histogram
 
 
 url = 'https://api.superjob.ru/2.0/oauth2/password/'
@@ -27,9 +28,13 @@ for object in base:
         counting.calc_vacancies(candidate, languages_dict, language, payment)
 
 sorted_base = sorted(languages_dict.items(), key=lambda a: a[1], reverse=True)
+x, y = [], []
+for i in range(len(sorted_base)):
+    print('Language :', sorted_base[i][0])
+    print('Number of vacancies :', sorted_base[i][1][0])
+    if sorted_base[i][1][2] !=0:
+        print('<Salary> :', round(sorted_base[i][1][1]/sorted_base[i][1][2]))
+        y.append(round(sorted_base[i][1][1]/sorted_base[i][1][2]))
+        x.append(i + 1)
 
-for object in sorted_base:
-    print('Language :', object[0])
-    print('Number of vacancies :', object[1][0])
-    if object[1][2] !=0:
-        print('<Salary> :', round(object[1][1]/object[1][2]))
+plt_histogram(sorted_base, x, y)
