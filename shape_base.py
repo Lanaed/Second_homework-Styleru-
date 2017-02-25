@@ -1,7 +1,7 @@
 import json
 import requests
 
-def shape_main_base( url, vacancy_url,  client_secret ):
+def shape_main_base(url, vacancy_url,  client_secret):
     headers = {'X-Api-App-Id': client_secret}
     parameters_of_vacancy = {
         'town': 4,
